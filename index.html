@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WElaybrick | Brick and stone building</title>
+    <meta name="description" content="Brick and stone building for outdoor garden design, repairs and maintenance.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --charcoal: #20262b;
+            --brick: #a8452a;
+            --mortar: #d8b06a;
+            --stone: #e7e8e6;
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Archivo", Arial, sans-serif;
+            color: var(--charcoal);
+            background: var(--white);
+            line-height: 1.6;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-stretch: 75%;
+            font-weight: 800;
+            line-height: 1.02;
+            letter-spacing: -0.01em;
+            margin: 0;
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 3px solid var(--mortar);
+            outline-offset: 3px;
+        }
+
+        .wrap {
+            width: min(1120px, 100% - 40px);
+            margin-inline: auto;
+        }
+
+        /* ---------- Top bar ---------- */
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: var(--charcoal);
+            color: var(--white);
+            border-bottom: 3px solid var(--mortar);
+        }
+
+        .topbar .wrap {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+        }
+
+        .wordmark {
+            font-stretch: 75%;
+            font-weight: 900;
+            font-size: 1.6rem;
+            letter-spacing: 0.01em;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .nav a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .nav a:hover {
+            color: var(--mortar);
+        }
+
+        .nav .call {
+            background: var(--brick);
+            padding: 9px 18px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        .nav .call:hover {
+            color: var(--white);
+            background: #8f3a22;
+        }
+
+        @media (max-width: 640px) {
+            .nav a:not(.call) {
+                display: none;
+            }
+        }
+
+        /* ---------- Hero ---------- */
+        .hero {
+            position: relative;
+            min-height: min(82vh, 760px);
+            display: flex;
+            align-items: flex-end;
+            color: var(--white);
+            background: var(--charcoal);
+            overflow: hidden;
+        }
+
+        .hero img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(32, 38, 43, 0.92) 0%, rgba(32, 38, 43, 0.45) 45%, rgba(32, 38, 43, 0.05) 100%);
+        }
+
+        .hero .wrap {
+            position: relative;
+            z-index: 1;
+            padding-block: 72px;
+        }
+
+        .hero h1 {
+            font-size: clamp(3.2rem, 9vw, 7rem);
+            max-width: 12ch;
+        }
+
+        .hero p {
+            max-width: 46ch;
+            font-size: 1.2rem;
+            margin: 20px 0 30px;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 14px 26px;
+            border-radius: 4px;
+            font-weight: 700;
+            text-decoration: none;
+            border: 2px solid var(--brick);
+            background: var(--brick);
+            color: var(--white);
+        }
+
+        .button:hover {
+            background: #8f3a22;
+            border-color: #8f3a22;
+        }
+
+        .button.ghost {
+            background: transparent;
+            border-color: var(--white);
+        }
+
+        .button.ghost:hover {
+            background: var(--white);
+            color: var(--charcoal);
+        }
+
+        /* ---------- Sections ---------- */
+        section {
+            padding-block: 88px;
+        }
+
+        .section-title {
+            font-size: clamp(2.2rem, 5vw, 3.6rem);
+            margin-bottom: 40px;
+        }
+
+        /* ---------- Services ---------- */
+        .services {
+            background: var(--stone);
+        }
+
+        .service-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            border-top: 3px solid var(--mortar);
+        }
+
+        .service-list li {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+            gap: 24px;
+            padding: 26px 0;
+            border-bottom: 3px solid var(--mortar);
+            align-items: baseline;
+        }
+
+        .service-list h3 {
+            font-size: clamp(1.6rem, 3.4vw, 2.4rem);
+        }
+
+        .service-list p {
+            margin: 0;
+            max-width: 52ch;
+        }
+
+        @media (max-width: 700px) {
+            .service-list li {
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+        }
+
+        /* ---------- Before and after ---------- */
+        .stack {
+            display: grid;
+            gap: 56px;
+        }
+
+        figure {
+            margin: 0;
+        }
+
+        figcaption {
+            margin-top: 12px;
+            padding-left: 16px;
+            font-weight: 600;
+        }
+
+        .zoom {
+            display: block;
+            width: 100%;
+            padding: 0;
+            border: 0;
+            background: none;
+            cursor: zoom-in;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .zoom img {
+            width: 100%;
+            transition: transform 0.4s ease;
+        }
+
+        .zoom:hover img {
+            transform: scale(1.02);
+        }
+
+        /* ---------- More work ---------- */
+        .more {
+            background: var(--stone);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .grid .zoom img {
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+        }
+
+        /* ---------- Reviews ---------- */
+        .reviews-head {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 8px 20px;
+            margin-bottom: 40px;
+        }
+
+        .reviews-head .section-title {
+            margin-bottom: 0;
+        }
+
+        .stars {
+            color: var(--brick);
+            font-size: 1.5rem;
+            letter-spacing: 0.15em;
+        }
+
+        .review-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-bottom: 36px;
+        }
+
+        .review-grid blockquote {
+            margin: 0;
+            padding: 26px;
+            background: var(--stone);
+            border-left: 4px solid var(--brick);
+            border-radius: 6px;
+        }
+
+        .review-grid p {
+            margin: 0 0 16px;
+        }
+
+        .review-grid cite {
+            font-style: normal;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        @media (min-width: 900px) {
+            .review-grid {
+                grid-template-columns: repeat(6, 1fr);
+            }
+
+            .review-grid blockquote {
+                grid-column: span 2;
+            }
+
+            .review-grid blockquote:nth-child(n+4) {
+                grid-column: span 3;
+            }
+        }
+
+        /* ---------- Contact ---------- */
+        .contact {
+            background: var(--charcoal);
+            color: var(--white);
+        }
+
+        .contact h2 {
+            font-size: clamp(2.6rem, 7vw, 5rem);
+            margin-bottom: 18px;
+        }
+
+        .contact p {
+            max-width: 44ch;
+            font-size: 1.15rem;
+            margin: 0 0 30px;
+        }
+
+        footer {
+            background: var(--charcoal);
+            color: #aab1b7;
+            padding-block: 24px;
+            border-top: 1px solid #38424a;
+            font-size: 0.9rem;
+        }
+
+        /* ---------- Full-screen viewer ---------- */
+        dialog {
+            width: min(1400px, 96vw);
+            max-height: 94vh;
+            padding: 0;
+            border: 0;
+            border-radius: 8px;
+            background: var(--charcoal);
+        }
+
+        dialog::backdrop {
+            background: rgba(0, 0, 0, 0.82);
+        }
+
+        dialog img {
+            width: 100%;
+            max-height: 88vh;
+            object-fit: contain;
+        }
+
+        dialog button {
+            display: block;
+            margin: 10px auto;
+            padding: 8px 22px;
+            border: 0;
+            border-radius: 4px;
+            background: var(--mortar);
+            color: var(--charcoal);
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .zoom img {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="topbar">
+        <div class="wrap">
+            <a class="wordmark" href="#top">WElaybrick</a>
+            <nav class="nav" aria-label="Main">
+                <a href="#services">Services</a>
+                <a href="#work">Our work</a>
+                <a href="#reviews">Reviews</a>
+                <a href="#contact">Contact</a>
+                <a class="call" href="tel:0427870300">Call</a>
+            </nav>
+        </div>
+    </header>
+
+    <main id="top">
+
+        <div class="hero">
+            <img src="images/curved-brick-paving-finished.jpg" alt="Curved brick paving with a brick garden wall">
+            <div class="wrap">
+                <h1>Brick and stone, built to last.</h1>
+                <p>Brick and stone building for outdoor garden design, repairs and maintenance.</p>
+                <div class="actions">
+                    <a class="button" href="#contact">Get a quote</a>
+                    <a class="button ghost" href="#work">See our work</a>
+                </div>
+            </div>
+        </div>
+
+        <section class="services" id="services">
+            <div class="wrap">
+                <h2 class="section-title">What we build</h2>
+                <ul class="service-list">
+                    <li>
+                        <h3>Brick and stone walls</h3>
+                        <p>Garden walls, retaining walls, planters and steps in brick, stone and bluestone.</p>
+                    </li>
+                    <li>
+                        <h3>Paving and paths</h3>
+                        <p>Brick paving, stepping stones and gravel paths, laid to fit the space.</p>
+                    </li>
+                    <li>
+                        <h3>Outdoor garden design</h3>
+                        <p>Garden beds, edging and feature planters that suit your yard.</p>
+                    </li>
+                    <li>
+                        <h3>Repairs and maintenance</h3>
+                        <p>Brick repairs, repointing and infill, matched to the existing work.</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="work">
+            <div class="wrap">
+                <h2 class="section-title">Before and after</h2>
+                <div class="stack">
+                    <figure>
+                        <button class="zoom" type="button"><img src="images/brick-paving-path-before-laid-finished.jpg" alt="Brick paving path: before, laid and finished"></button>
+                        <figcaption>Brick paving path: before, laid and finished</figcaption>
+                    </figure>
+                    <figure>
+                        <button class="zoom" type="button"><img src="images/stepping-stone-side-path-progress-finished.jpg" alt="Stepping stone side path: in progress and finished"></button>
+                        <figcaption>Stepping stone side path: in progress and finished</figcaption>
+                    </figure>
+                    <figure>
+                        <button class="zoom" type="button"><img src="images/stone-retaining-wall-sleeper-steps.jpg" alt="Stone retaining wall with sleeper steps"></button>
+                        <figcaption>Stone retaining wall with sleeper steps</figcaption>
+                    </figure>
+                    <figure>
+                        <button class="zoom" type="button"><img src="images/brick-repair-before-after.jpg" alt="Porch brick repair: before and after"></button>
+                        <figcaption>Porch brick repair: before and after</figcaption>
+                    </figure>
+                    <figure>
+                        <button class="zoom" type="button"><img src="images/window-brick-infill-before-after.jpg" alt="Window brick infill: before and after"></button>
+                        <figcaption>Window brick infill: before and after</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <section class="more">
+            <div class="wrap">
+                <h2 class="section-title">More of our work</h2>
+                <div class="grid">
+                    <button class="zoom" type="button"><img src="images/gravel-bed-feature-planter.jpg" alt="Gravel bed feature planter"></button>
+                    <button class="zoom" type="button"><img src="images/brick-wall-corner-detail.jpg" alt="Brick wall corner detail"></button>
+                    <button class="zoom" type="button"><img src="images/brick-garden-wall-close-up.jpg" alt="Brick garden wall close-up"></button>
+                    <button class="zoom" type="button"><img src="images/bluestone-round-garden-bed.jpg" alt="Bluestone round garden bed"></button>
+                    <button class="zoom" type="button"><img src="images/garden-bed-granite-capping-trees.jpg" alt="Garden bed with granite capping and trees"></button>
+                </div>
+            </div>
+        </section>
+
+        <section id="reviews">
+            <div class="wrap">
+                <div class="reviews-head">
+                    <h2 class="section-title">136 five-star reviews</h2>
+                    <span class="stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                    <span>on Airtasker</span>
+                </div>
+                <div class="review-grid">
+                    <blockquote>
+                        <p>Absolutely flawless process. Wes was fantastic. Great work, great communication, great attitude and a very happy customer</p>
+                        <cite>Nick P. &middot; Rebuilt a low brick planter wall</cite>
+                    </blockquote>
+                    <blockquote>
+                        <p>Wes did such a professional, clean, and efficient job. He was very polite and able to do the job quickly and expertly</p>
+                        <cite>Sarah T.</cite>
+                    </blockquote>
+                    <blockquote>
+                        <p>Have used Wes a second time for some more brick work as he did a great job for us first time round - and very happy with the result again.</p>
+                        <cite>Julie K. &middot; Repeat customer</cite>
+                    </blockquote>
+                    <blockquote>
+                        <p>Amazing service with Wesley, super efficient and clear communication. All looks brilliant afterwards</p>
+                        <cite>Flynn F.</cite>
+                    </blockquote>
+                    <blockquote>
+                        <p>Excellent work prompt and fast, highly recommended.</p>
+                        <cite>Allan H.</cite>
+                    </blockquote>
+                </div>
+                <a class="button" href="https://www.airtasker.com/users/7187c2bc3f6b-p-25809881/">See all reviews on Airtasker</a>
+            </div>
+        </section>
+
+        <section class="contact" id="contact">
+            <div class="wrap">
+                <h2>Ask for a quote.</h2>
+                <p>Call, email or message on Instagram and tell us about your job.</p>
+                <div class="actions">
+                    <a class="button" href="tel:0427870300">Call</a>
+                    <a class="button ghost" href="mailto:welaybrick@gmail.com">Email</a>
+                    <a class="button ghost" href="https://www.instagram.com/welay_brick">Instagram</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="wrap">&copy; WElaybrick</div>
+    </footer>
+
+    <dialog id="viewer">
+        <img src="" alt="">
+        <button type="button">Close</button>
+    </dialog>
+
+    <script>
+        const viewer = document.getElementById("viewer");
+        const viewerImg = viewer.querySelector("img");
+
+        document.querySelectorAll(".zoom").forEach(function (btn) {
+            btn.addEventListener("click", function () {
+                const img = btn.querySelector("img");
+                viewerImg.src = img.src;
+                viewerImg.alt = img.alt;
+                viewer.showModal();
+            });
+        });
+
+        viewer.addEventListener("click", function () {
+            viewer.close();
+        });
+    </script>
+
+</body>
+
+</html>
